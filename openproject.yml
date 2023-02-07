@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  openproject:
+    image: openproject/community:12
+    environment:
+      - "DATABASE_URL=postgresql://open_project_dev_user:open_project_dev_pass@192.168.1.221/open_project_dev"
+      - "USE_PUMA=true"
+      # set to true to enable the email receiving feature. See ./docker/cron for more options
+      - "IMAP_ENABLED=false"
+      - USER_UID=1000
+      - USER_GID=1000
+      - OPENPROJECT_HTTPS=false
+      - OPENPROJECT_HOST__NAME=192.168.1.223:8080
+    volumes:
+      - ./openproject/logs:/var/log/supervisor
+      - ./openproject/static:/var/openproject/assets
+      - ./openproject/tmp:/home/dev/openproject/tmp
+    ports:
+      - "5000:8080"

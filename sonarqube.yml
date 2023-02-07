@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  sonarqube:
+    image: sonarqube:9.7-community
+    ports:
+      - "9000:9000"
+    volumes:
+      - "./sonarqube/conf:/opt/sonarqube/conf"
+      - "./sonarqube/extensions:/opt/sonarqube/extensions"
+      - "./sonarqube/logs:/opt/sonarqube/logs"
+      - "./sonarqube/data:/opt/sonarqube/data"
+    environment:
+      - sonar.jdbc.username=sonarqube_dev_user
+      - sonar.jdbc.password=sonarqube_dev_pass
+      - sonar.jdbc.url=jdbc:postgresql://192.168.1.221:5432/sonarqube_dev
+    ulimits:
+      nproc: 131072
+      nofile:
+        soft: 8192
+        hard: 131072

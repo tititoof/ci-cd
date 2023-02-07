@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  jenkins_agent_vuejs:
+    image: ghcr.io/tititoof/jenkins-agent-vuejs
+    ports:
+      - 8083:8080
+      - 50002:50000
+    container_name: jenkins_agent_vuejs
+    command: -url http://192.168.1.222:8081 14fddb0ccd3827b479bd308f1cf0c540960d706350e985c8c90c4b7797522c16 agent_vuejs_1
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./vuejs_agent_jenkins/home:/var/jenkins_home
+      - ./vuejs_agent_jenkins/agent:/home/jenkins/agent

@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  server:
+    image: gitea/gitea:latest
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=192.168.1.221:5432
+      - GITEA__database__NAME=gitea_dev
+      - GITEA__database__USER=gitea_dev_user
+      - GITEA__database__PASSWD=gitea_dev_pass
+    restart: always
+    volumes:
+      - ./gitea/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"

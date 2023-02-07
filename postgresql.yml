@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  postgresql_db_1:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: toofytroll_dev_local
+      POSTGRES_PASSWORD: uF8feX8VVrBkui
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+    volumes: 
+      - ./postgresql/data:/var/lib/postgresql/data
+    restart: always

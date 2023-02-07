@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  jenkins_agent_rails:
+    image: ghcr.io/tititoof/jenkins-agent-rails:latest
+    ports:
+      - 8082:8080
+      - 50001:50000
+    container_name: jenkins_agent_rails
+    command: -url http://192.168.1.222:8081 c607358ac1f58668e7d752eb7c17e01ad00abbed01064ca98b3fad1d9f0c5f70 agent_rails_1
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./rails_agent_jenkins/home:/var/jenkins_home
+      - ./rails_agent_jenkins/agent:/home/jenkins/agent
